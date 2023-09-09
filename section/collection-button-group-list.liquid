@@ -1,0 +1,92 @@
+<h3 class="tc"> {{ section.settings.title }}</h3>
+
+{%- if section.blocks.size > 0 -%}
+  <ul class="grp_coll_btn">
+    {%- for block in section.blocks -%}
+      <li class="grp_coll_btn_item" {{ block.shopify_attributes }}>
+        
+
+          {%- if block.settings.btn_coll != blank -%}
+           <a href="{{ block.settings.btn_coll.url }}" >{{ block.settings.btn_coll.title }} </a>
+          
+          {%- endif -%}
+
+      </li>
+    {%- endfor -%}
+  </ul>
+{%- endif -%}
+
+
+{% schema %}
+  
+{
+  "name": "Collection button list",
+  "class": "index-section",
+  "max_blocks": 36,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Collection button list"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_button",
+      "name": "Collection button",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "btn_coll",
+          "label": "Collection select for the button link"
+        }        
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SM Coll Button list",
+      "category": "Custom",
+      "blocks": [
+        {
+          "type": "collection_button"
+        },
+        {
+          "type": "collection_button"
+        },
+        {
+          "type": "collection_button"
+        },
+        {
+          "type": "collection_button"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+  
+{% stylesheet %}
+  .grp_coll_btn {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    align-content: flex-start;
+    overflow: auto;
+    flex-direction: row;
+  }
+  li.grp_coll_btn_item {
+    border: 1px solid;
+    margin: 0.3rem;
+} 
+  .tc{
+    text-align: center;
+  }
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
