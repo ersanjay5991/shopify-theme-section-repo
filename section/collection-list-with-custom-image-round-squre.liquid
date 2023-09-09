@@ -1,0 +1,138 @@
+<div class="collection-list-with-blocks">
+  <h3 class="tc">{{ section.settings.title }}</h3>
+
+  {%- if section.blocks.size > 0 -%}
+    <ul class="grp_coll_icon_list">
+      {%- for block in section.blocks -%}
+        <div class="grp_coll_icon_item">
+          {%- if block.settings.selected_collection != blank -%}
+            <a href="{{ block.settings.selected_collection.url }}">
+          {%- endif -%}
+
+            <img loading="lazy"
+              src="{{ block.settings.custom_image | img_url: '85x' }}"
+              alt="{{ block.settings.block_title }} Image"
+            >
+        
+          <h3>{{ block.settings.selected_collection.title }}</h3>
+          <h5>{{ block.settings.block_title }}</h5>
+          <p>{{ block.settings.custom_text }}</p>              
+
+          {%- if block.settings.selected_collection != blank -%}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "SM Collection List",
+  "max_blocks": 36,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Collection button list"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_round",
+      "name": "Collection round list",
+      "settings": [
+        
+        {
+          "type": "collection",
+          "id": "selected_collection",
+          "label": "Select Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_image",
+          "label": "Custom Image"
+        },
+        {
+          "type": "text",
+          "id": "block_title",
+          "label": "Block Title",
+          "default": "New Block"
+        },
+        {
+          "type": "text",
+          "id": "custom_text",
+          "label": "Custom Text",
+          "default": "Some Custom Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SM Collection icon list",
+      "category": "Custom",
+      "blocks": [
+        {
+          "type": "collection_round"
+        },
+        {
+          "type": "collection_round"
+        },
+        {
+          "type": "collection_round"
+        },
+        {
+          "type": "collection_round"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+  .grp_coll_icon_list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-content: flex-start;
+    overflow: auto;
+    flex-direction: row;
+  }
+  .grp_coll_icon_item {
+    border: 1px solid;
+    margin-bottom: 2px;
+} 
+
+    @media (max-width: 250px) {
+    .grp_coll_icon_item {
+      flex-basis: 48%;
+    }
+  }
+
+  @media (min-width: 251px) and (max-width: 450px) {
+    .grp_coll_icon_item {
+      flex-basis: 32%;
+    }
+  }
+
+  @media (min-width: 451px) and (max-width: 650px) {
+    .flex-item {
+      flex-basis: 23%;
+    }
+  }
+
+  @media (min-width: 651px) {
+    .flex-item {
+      flex-basis: 22%;
+    }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
